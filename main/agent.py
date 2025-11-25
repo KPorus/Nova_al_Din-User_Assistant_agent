@@ -10,10 +10,14 @@ from google.genai import types
 
 
 from search_agent.agent import create_search_agent
+from gdrive.agent import gdrive
+# from file_managment_agent.agent import run_fileSystem_agent
 SearchAgent = create_search_agent()
+GDriveAgent = gdrive()
+
+# FileAgent = run_fileSystem_agent()
 
 # from gdrive import GDriveAgent
-# from gdrive.agent import GDriveAgent
 print("Loading ADK Web main agent...",SearchAgent)
 # print("GDriveAgent:",GDriveAgent)
 load_dotenv()
@@ -48,11 +52,13 @@ Guidelines:
 
 # Main orchestrator agent as a composite
 root_agent = Agent(
+    model=Gemini(model="gemini-2.0-flash", retry_options=retry_config),
     name="main",
     instruction=main_instruction,
     tools=[
         AgentTool(agent=SearchAgent),
-        # AgentTool(agent=GDriveAgent),
+        AgentTool(agent=GDriveAgent),
+        # AgentTool(agent=FileAgent),
     ]
 )
 

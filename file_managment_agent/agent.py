@@ -63,6 +63,7 @@ def create_filesystem_agent(root_path):
                 connection_params=StdioConnectionParams(
                     server_params=StdioServerParameters(
                         command="npx",
+                        # command=r"C:\nvm4w\nodejs\node.exe",
                         args=[
                             "-y",
                             "@modelcontextprotocol/server-filesystem",
@@ -70,15 +71,23 @@ def create_filesystem_agent(root_path):
                             *drives
                         ],
                     ),
-                    # timeout=60,
+                    timeout=300,
                 )
             )
         ],
     )
 
 
-# First ensure root_path.txt exists
-DEFAULT_ROOT = os.path.abspath(os.path.dirname(__file__))
-root_agent = create_filesystem_agent(DEFAULT_ROOT)
+# # First ensure root_path.txt exists
+# DEFAULT_ROOT = os.path.abspath(os.path.dirname(__file__))
+# root_agent = create_filesystem_agent(DEFAULT_ROOT)
 
-print(f"[ADK] File system agent mounted at: {DEFAULT_ROOT}")
+def run_fileSystem_agent():
+    # First ensure root_path.txt exists
+    DEFAULT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    print(f"[ADK] File system agent mounted at: {DEFAULT_ROOT}")
+    root_agent = create_filesystem_agent(DEFAULT_ROOT)
+    return root_agent
+
+
+root_agent = run_fileSystem_agent()
