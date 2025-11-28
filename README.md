@@ -38,7 +38,6 @@ Only an agent architecture can safely and reliably turn natural language request
 
 
 ### Run locally
-```markdown
 
 Start the agent with the built-in web UI (default http://127.0.0.1:8000):
 
