@@ -2,10 +2,10 @@
 
 ### Problem Statement  
 Most personal AI assistants (ChatGPT, Claude, Gemini, etc.) can answer questions and write emails, but they are "blind" to our real digital life. They can't read our Gmail, search our Google Drive files, check our calendar, or search google for user specific information because they have zero access to our personal data and tools.
-As a result, when you ask “List down todays mail” or “Create a doc with and share it with the team”, the assistant either hallucinates, gives generic advice, or tells you to do it manually.
+As a result, when you ask “List down today's mail” or “Create a doc and share it with the team”, the assistant either hallucinates, gives generic advice, or tells you to do it manually.
 This creates a huge gap between what an AI could do for us and what it actually does today. We want a single, trustworthy agent that can securely act across all our personal productivity tools with the same ease as a human assistant.
 
-The goal: a single, secure, always-on agent that can actually act across Local Directory, Gmail, Google Drive, Docs, Calendar, web search using nothing more than natural language.
+The goal: a single, secure, always-on agent that can actually act across Local Directory, Gmail, Google Drive, Docs, Calendar, and web search using nothing more than natural language.
 
 ### Why agents?  
 Traditional “one-shot” LLMs are stateless and tool-less by design.  
@@ -24,16 +24,16 @@ Only an agent architecture can safely and reliably turn natural language request
 ![Architecture diagram](<AI_Architecture diagram.png>)
 - Core model: Gemini-2.0-flash 
 - Framework: Google ADK, Google Cloud Platform  
-- Authentication: OAuth2 by Google cloud platform 
-- One main ReAct agent that first detects which services are needed use multiagent structure 
+- Authentication: OAuth2 by Google Cloud Platform 
+- One main agent that first detects which services are needed uses a multi-agent structure 
 - Five specialised sub-routers (Gmail, Drive, Docs, Calendar, Search)  
-- Full tool suite (exact same as in the diagram you posted):  
+- Full tool suite (same as in the diagram you posted):  
   → Gmail: search threads, send, read, delete  
   → Drive: list/search  
   → Docs: create, find, update title/content, share 
   → Calendar: free-busy, create events, list, remove
   → Search Agent: Google Custom Search 
-  → MCP server fetch user local encironment files/folder, read,write them 
+  → MCP server fetches the user's local environment files/folders, reads, and  writes them 
   → General LLM fallback for reasoning/summarisation  
 
 
@@ -45,7 +45,7 @@ Start the agent with the built-in web UI (default http://127.0.0.1:8000):
 adk web
 ```
 
-For full visibility during development / debugging:
+For full visibility during development/debugging:
 
 ```bash
 adk web --log_level DEBUG
@@ -58,27 +58,27 @@ adk web --reload --log_level DEBUG
 
 ```
 
-That’s it — after the first `adk web` it will automatically open the beautiful built-in ADK chat interface with Nova al-Din ready to go.
+That’s it — after the first `adk web`, it will automatically open the beautiful built-in ADK chat interface with Nova al-Din ready to go.
 
 ### The Build – Tech stack
 
-- Langueges: Python
+- Languages: Python
 - LLM: gemini-2.0-flash-exp (via Vertex AI or Google AI Studio API)  
 - Agent framework: Google ADK + Google Cloud Platform  
 - Google Workspace: official google-api-python-client (Gmail, Drive, Docs, Calendar)  
 - Search: Google search tools  
 - OAuth2 flow: Google Cloud Oauth  
 - Token storage: local folder
-- Memory: google adk InMemorySession
+- Memory: Google Adk InMemorySession
 
 
 ### If I had more time
 
-1. Add long-term vector memory for “remember everything I ever told you”  
+1. Add long-term vector memory for “remember everything I ever told you.”  
 2. Voice mode with Whisper + Gemini live streaming  
 3. Make Token storage more secure
 4. Multi-agent hierarchy (spawn temporary research/finance/travel agents)  
-5. Give access to drive for upload, delete
+5. Give access to the drive for upload, delete
 6. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
 7. Mobile app (React Native) with background sync
 
