@@ -36,12 +36,9 @@ Only an agent architecture can safely and reliably turn natural language request
   → MCP server fetch user local encironment files/folder, read,write them 
   → General LLM fallback for reasoning/summarisation  
 
-Yes, that’s perfectly fine and exactly how I document it myself – clean and correct for the current Google ADK (as of November 2025).
 
-Here’s the slightly polished version I actually use in my own READMEs (feel free to copy-paste):
-
-```markdown
 ### Run locally
+```markdown
 
 Start the agent with the built-in web UI (default http://127.0.0.1:8000):
 
