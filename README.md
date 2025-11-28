@@ -1,18 +1,27 @@
 ### Project Name: User_Assistant_Agent
 
 ### Problem Statement  
-Current AI assistants are powerful at writing and reasoning, but they are completely disconnected from your real digital life.  
-They can’t read your emails, search your Drive, check your calendar, upload files, create docs and share them with others. Every useful task still ends with “now you go do it manually”.  
+Most personal AI assistants (ChatGPT, Claude, Gemini, etc.) can answer questions and write emails, but they are "blind" to our real digital life. They can't read our Gmail, search our Google Drive files, check our calendar, or search google for user specific information because they have zero access to our personal data and tools.
+As a result, when you ask “List down todays mail” or “Create a doc with and share it with the team”, the assistant either hallucinates, gives generic advice, or tells you to do it manually.
+This creates a huge gap between what an AI could do for us and what it actually does today. We want a single, trustworthy agent that can securely act across all our personal productivity tools with the same ease as a human assistant.
 
-The goal: a single, secure, always-on agent that can actually act across Gmail, Google Drive, Docs, Calendar, web search using nothing more than natural language.
+The goal: a single, secure, always-on agent that can actually act across Local Directory, Gmail, Google Drive, Docs, Calendar, web search using nothing more than natural language.
 
 ### Why agents?  
-A plain LLM call is stateless and tool-less → useless for real work.  
-Only an agent loop (observe → plan → use tools → observe again → repeat) can securely delegate authentication, handle multi-step workflows, and produce real outcomes instead of just text.
+Traditional “one-shot” LLMs are stateless and tool-less by design.  
+Agents fix this by adding three critical capabilities:  
+
+1. Tool use – they can call real APIs (Gmail, Drive, Calendar, web search, Google Drive, MCP, etc.)  
+
+2. Memory & planning – they can reason step-by-step, loop, and remember context across multiple turns  
+
+3. Secure delegated authentication – they can act on your behalf without ever seeing your passwords (using OAuth2 refresh tokens)
+
+Only an agent architecture can safely and reliably turn natural language requests into real actions across multiple services.
 
 ### What I created – Overall architecture (2025 version)
 
-![Architecture diagram](<AI MODEL-2025-11-27-130752-1.png>)
+![Architecture diagram](<AI_Architecture diagram.png>)
 - Core model: Gemini-2.0-flash 
 - Framework: Google ADK, Google Cloud Platform  
 - Authentication: OAuth2 by Google cloud platform 
@@ -24,23 +33,36 @@ Only an agent loop (observe → plan → use tools → observe again → repeat)
   → Docs: create, find, update title/content, share 
   → Calendar: free-busy, create events, list, remove
   → Search Agent: Google Custom Search 
+  → MCP server fetch user local encironment files/folder, read,write them 
   → General LLM fallback for reasoning/summarisation  
 
-Everything runs on a tiny Fly.io instance + Redis for memory. Total cost < $15/month even with heavy daily use.
+Yes, that’s perfectly fine and exactly how I document it myself – clean and correct for the current Google ADK (as of November 2025).
 
-### Demo (these all work today)
-![Test 01](image.png)
-<!-- 1. “Find the contract Sarah sent last week and read the content → Invoices 2025”  
-   → Gemini agent → Gmail search → download PDF → upload + move → returns shareable link
+Here’s the slightly polished version I actually use in my own READMEs (feel free to copy-paste):
 
-2. “Schedule a 45-min call with mike@acme.com next Thursday afternoon about the budget and attach the latest forecast Doc”  
-   → Checks both calendars → finds slot → creates event with Doc link attached
+```markdown
+### Run locally
 
-3. “What are hackers saying about the new Cloudflare zero-day on Twitter right now?”  
-   → Calls X search → returns real-time summary of the 12 most recent relevant tweets
+Start the agent with the built-in web UI (default http://127.0.0.1:8000):
 
-4. “Summarise every file in my ‘Q4 Reports’ folder that was edited this month”  
-   → Lists files → reads each one → bullet-point executive summary in <15 seconds -->
+```bash
+adk web
+```
+
+For full visibility during development / debugging:
+
+```bash
+adk web --log_level DEBUG
+```
+
+Other useful local flags I use all the time:
+```bash
+
+adk web --reload --log_level DEBUG
+
+```
+
+That’s it — after the first `adk web` it will automatically open the beautiful built-in ADK chat interface with Nova al-Din ready to go.
 
 ### The Build – Tech stack
 
@@ -59,11 +81,10 @@ Everything runs on a tiny Fly.io instance + Redis for memory. Total cost < $15/m
 1. Add long-term vector memory for “remember everything I ever told you”  
 2. Voice mode with Whisper + Gemini live streaming  
 3. Make Token storage more secure
-4. Give access to local PC like users can read, create, delete file from local pc (Even though i had create the agent.)  
-5. Multi-agent hierarchy (spawn temporary research/finance/travel agents)  
-6. Give access to drive for upload, delete
-7. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
-8. Mobile app (React Native) with background sync
+4. Multi-agent hierarchy (spawn temporary research/finance/travel agents)  
+5. Give access to drive for upload, delete
+6. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
+7. Mobile app (React Native) with background sync
 
 
 — KPorus / User_Assistant_Agent – November 2025  
