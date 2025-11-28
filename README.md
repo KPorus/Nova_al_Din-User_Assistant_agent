@@ -39,6 +39,28 @@ Only an agent architecture can safely and reliably turn natural language request
 
 ### Run locally
 
+## Shared setup (all Google agents)
+
+For all four agents, keep the flow and wording identical:
+
+1) Google Cloud configuration  
+- In the same GCP project, enable these APIs: Gmail API, Google Drive API, Google Docs API, and Google Calendar API.
+- Under Google Auth Platform → Clients, create one OAuth 2.0 Web client (or one per agent if you prefer strict separation)
+- Set Authorized JavaScript origins to:  
+  - http://localhost:8000 (ADK Web UI)  
+- Set Authorized redirect URIs to:  
+  - http://localhost:8080/ (ADK local OAuth callback, matching your screenshot).
+
+2) Download credentials  
+- Download the client secret JSON and rename it appropriately per agent, for example:  
+  - gmail/credentials/oauth.keys.json  
+  - gdrive/credentialsoauth.keys.json  
+  - gdoc/credentials/oauth.keys.json  
+  - gcalendar/credentials/oauth.keys.json
+
+3) Token storage convention  
+- Each agent will create and reuse its own token.json in the same credentials folder, generated using google-auth-oauthlib’s InstalledAppFlow, exactly like the official Python quickstarts.
+
 Start the agent with the built-in web UI (default http://127.0.0.1:8000):
 
 ```bash
@@ -63,7 +85,7 @@ That’s it — after the first `adk web`, it will automatically open the beauti
 ### The Build – Tech stack
 
 - Languages: Python
-- LLM: gemini-2.0-flash-exp (via Vertex AI or Google AI Studio API)  
+- LLM: gemini-2.0-flash-exp (Google AI Studio API)  
 - Agent framework: Google ADK + Google Cloud Platform  
 - Google Workspace: official google-api-python-client (Gmail, Drive, Docs, Calendar)  
 - Search: Google search tools  
@@ -79,8 +101,9 @@ That’s it — after the first `adk web`, it will automatically open the beauti
 3. Make Token storage more secure
 4. Multi-agent hierarchy (spawn temporary research/finance/travel agents)  
 5. Give access to the drive for upload, delete
-6. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
-7. Mobile app (React Native) with background sync
+6. Give access to read the previous event from Google Calendar
+7. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
+8. Mobile app (React Native) with background sync
 
 
 — KPorus / User_Assistant_Agent – November 2025  
