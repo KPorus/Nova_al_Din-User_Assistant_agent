@@ -96,14 +96,76 @@ That’s it — after the first `adk web`, it will automatically open the beauti
 
 ### If I had more time
 
-1. Add long-term vector memory for “remember everything I ever told you.”  
-2. Voice mode with Whisper + Gemini live streaming  
-3. Make Token storage more secure
-4. Multi-agent hierarchy (spawn temporary research/finance/travel agents)  
-5. Give access to the drive for upload, delete
-6. Give access to read the previous event from Google Calendar
-7. Use more search tools like Tavily API + twitter-api-v2 + Playwright for full-page browsing when needed
-8. Mobile app (React Native) with background sync
+1. **Long-Term Vector Memory**
+   Enable persistent memory for preferences, past conversations, recurring tasks, and user-specific behavior.
+
+2. **n8n Automation Pipelines**
+   Integrate with **n8n** to support fully automated background workflows:
+
+   * Auto-organize emails
+   * Generate Docs from Gmail content
+   * Scheduled summaries and reminders
+   * Multi-step workflow execution where the agent is the “brain” and n8n is the “automation engine”
+
+3. **Google Location Sharing Integration**
+
+   * Connect to Google Maps Location Sharing API
+   * If the user provides a live share link, the agent can fetch and describe the real-time location (address, area, distance, etc.)
+   * Add automated polling: **every 5 minutes**, n8n fetches updated location → agent interprets → returns latest status
+
+4. **Voice Mode (Hands-Free Agent)**
+   Add Whisper + Gemini streaming for:
+
+   * Real-time voice commands
+   * Spoken summaries
+   * Dictation for emails and documents
+
+5. **Secure Token Vault**
+   Move from local JSON token storage to an encrypted system, such as:
+
+   * Google Cloud Secret Manager
+   * HashiCorp Vault
+   * Local encrypted Vault mode for offline usage
+
+6. **Expanded Multi-Agent Hierarchy**
+   Support temporary, task-specialized sub-agents:
+
+   * Research Agent
+   * Finance Agent
+   * Travel Planner Agent
+   * Inbox Automation Agent
+     Each runs with an isolated context and dedicated tool permissions.
+
+7. **Enhanced Google Drive Control**
+   Add full file operations:
+
+   * Upload
+   * Delete
+   * Move/rename
+   * Duplicate
+   * Generate & manage share links
+
+8. **Smarter Calendar Tools**
+
+   * Read past events
+   * Suggest optimal meeting times
+   * Weekly schedule summaries
+   * Conflict detection & resolution
+
+9. **Advanced Web Search Layer**
+   Combine multiple engines and tools:
+
+   * Tavily API
+   * Twitter API v2
+   * Playwright for full-page retrieval
+     The agent will automatically choose the best search strategy for each query.
+
+10. **Mobile App (React Native)**
+
+* Background sync with n8n
+* Push notifications (emails, events, alerts, location updates)
+* Voice activation for commands on the go
+
 
 
 — KPorus / User_Assistant_Agent – November 2025  
