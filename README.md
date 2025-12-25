@@ -1,8 +1,8 @@
-### Project Name: User_Assistant_Agent
+### Project Name: Nova al-Din
 
 ### Problem Statement  
-Most personal AI assistants (ChatGPT, Claude, Gemini, etc.) can answer questions and write emails, but they are "blind" to our real digital life. They can't read our Gmail, search our Google Drive files, check our calendar, or search google for user specific information because they have zero access to our personal data and tools.
-As a result, when you ask “List down today's mail” or “Create a doc and share it with the team”, the assistant either hallucinates, gives generic advice, or tells you to do it manually.
+Most personal AI assistants (ChatGPT, Claude, Gemini, etc.) can answer questions and write emails, but they are "blind" to our real digital life. They can't read our Gmail, search our Google Drive files, check our calendar, or search Google for user-specific information because they have zero access to our personal data and tools.
+As a result, when you ask “List down today's mail” or “Create a doc and share it with the team, the assistant either hallucinates, gives generic advice, or tells you to do it manually.
 This creates a huge gap between what an AI could do for us and what it actually does today. We want a single, trustworthy agent that can securely act across all our personal productivity tools with the same ease as a human assistant.
 
 The goal: a single, secure, always-on agent that can actually act across Local Directory, Gmail, Google Drive, Docs, Calendar, and web search using nothing more than natural language.
